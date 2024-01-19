@@ -1,4 +1,6 @@
 const grid = document.querySelector('.grid');
+const elPlayer = document.querySelector('.player');
+const elTimer = document.querySelector('.timer');
 
 let selectedCards = ['', ''];
 
@@ -92,8 +94,23 @@ const loadCards = () => {
     const card = createCard(character);
     grid.appendChild(card);
   })
-
 }
 
-loadCards();
+const startTimer = () => {
+  setInterval(() => {
+    
+    const currentTime = parseInt(elTimer.textContent);
+    elTimer.textContent = (currentTime + 1);
+
+  }, 1000);
+}
+
+window.onload = () => {
+  
+  const playerName = localStorage.getItem('mem:player');
+  elPlayer.textContent = playerName;
+  startTimer();
+  loadCards();
+}
+
 
