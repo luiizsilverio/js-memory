@@ -4,17 +4,18 @@
   width: 100%;
   max-width: 800px;
   gap: 15px;
-  margin: 100px auto;
+  margin: 50px auto;
 }
 
 .card {
   width: 100%;
   aspect-ratio: 3/4;
-  background-color: var(--COR-CINZA);
+  /* background-color: var(--COR-CINZA); */
   position: relative;
   transition: all .4s ease;
   transform-style: preserve-3d;
   border-radius: 8px;
+  box-shadow: 0 1px 6px #ccc;
 }
 
 .face {
@@ -26,6 +27,7 @@
   border: 2px solid #aad5e0;
   border-radius: 8px;
   color: white;
+  transition: all .4s ease;
 }
 
 .front {
@@ -36,9 +38,20 @@
 .back {
   background-image: url('../images/back.png');  
   backface-visibility: hidden;
-  filter: grayscale(.9);
+  filter: saturate(0.4);
 }
 
 .card:hover {
+  .back {
+    filter: saturate(1);
+  }
+}
+
+.show-card {
   transform: rotateY(180deg);
+}
+
+.disabled-card {
+  filter: saturate(0);
+  opacity: 0.7;
 }
