@@ -3,6 +3,7 @@ const elPlayer = document.querySelector('.player');
 const elTimer = document.querySelector('.timer');
 
 let selectedCards = ['', ''];
+let timer;
 
 const characters = [
   'beth',
@@ -21,7 +22,11 @@ const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
   if (disabledCards.length === characters.length * 2) {
-    alert('Parabéns, você conseguiu!');
+    setTimeout(() => {
+      alert(`Parabéns, ${elPlayer.textContent}. Você conseguiu! Tempo: ${elTimer.textContent} segundos.`);
+      startTimer();
+      loadCards();
+    }, [500]);
   }
 }
 
@@ -90,6 +95,8 @@ const shuffleArray = (lista) => {
 const loadCards = () => {
   const allCards = shuffleArray([...characters, ...characters]);
 
+  grid.innerHTML = '';
+
   allCards.forEach((character) => {
     const card = createCard(character);
     grid.appendChild(card);
@@ -97,7 +104,13 @@ const loadCards = () => {
 }
 
 const startTimer = () => {
-  setInterval(() => {
+  if (timer) {
+    clearInterval(timer);
+  }
+
+  elTimer.textContent = '0';
+
+  timer = setInterval(() => {
     
     const currentTime = parseInt(elTimer.textContent);
     elTimer.textContent = (currentTime + 1);
